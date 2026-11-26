@@ -4,6 +4,7 @@ import './style.css';
 const canvas = document.querySelector('#scene');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#160f1d');
+scene.fog = new THREE.Fog(scene.background, 8, 28);
 
 const camera = new THREE.PerspectiveCamera(
   40,
@@ -30,6 +31,17 @@ scene.add(keyLight);
 const fillLight = new THREE.PointLight('#bd72ff', 18, 12);
 fillLight.position.set(-3, 1, -2);
 scene.add(fillLight);
+
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(200, 200),
+  new THREE.MeshStandardMaterial({
+    color: '#397d46',
+    roughness: 0.92,
+  }),
+);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -0.94;
+scene.add(ground);
 
 const cube = new THREE.Mesh(
   new THREE.BoxGeometry(1.7, 1.7, 1.7),
